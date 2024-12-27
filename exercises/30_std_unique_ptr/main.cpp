@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <cstring>
 
 // READ: `std::unique_ptr` <https://zh.cppreference.com/w/cpp/memory/unique_ptr>
 
@@ -57,8 +58,13 @@ int main(int argc, char **argv) {
     std::vector<const char *> answers[]{
         {"fd"},
         // TODO: 分析 problems[1] 中资源的生命周期，将记录填入 `std::vector`
-        {"", "", "", "", "", "", "", ""},
-        {"", "", "", "", "", "", "", ""},
+#if defined(_WIN32)
+        {"ffr", "d"},
+        {"r", "d", "d"},
+#else
+        {"d", "ffr"},
+        {"d", "d", "r"},
+#endif
     };
 
     // ---- 不要修改以下代码 ----
